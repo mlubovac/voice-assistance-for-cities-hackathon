@@ -1,6 +1,5 @@
 const builder = require('botbuilder');
 const express = require('express');
-const path = require('path');
 const pointInPolygon = require('point-in-polygon');
 const getLocation = require('./utils/location');
 const data = require('./utils/data');
@@ -32,7 +31,7 @@ const intents = new builder.IntentDialog({
 intents.onDefault([
     (session) => {
         session.beginDialog('/welcome')
-    }    
+    }
 ])
 
 intents.matches('BulkTrashPickupDates', [
@@ -52,7 +51,7 @@ bot.dialog('/welcome', [
 
 bot.dialog('/BulkTrashPickupDates', [
     (session) => {
-        builder.Prompts.text(session, 'What is your address');        
+        builder.Prompts.text(session, 'What is your address');
     },
     async (session, results) => {
         const location = await getLocation(results.response)
@@ -61,11 +60,11 @@ bot.dialog('/BulkTrashPickupDates', [
         if (pickupArea) {
             session.send(`Bulk trash pickup dates for **${results.response}** are <br /> ${pickupArea.pickupDates.join('<br />')}`);
         } else {
-            session.send(`Couldn't find pickup date for **${results.response}**`);            
+            session.send(`Couldn't find pickup date for **${results.response}**`);
         }
 
-        session.endDialog();        
-    }      
+        session.endDialog();
+    }
 ])
 
 //=========================================================
@@ -74,5 +73,5 @@ bot.dialog('/BulkTrashPickupDates', [
 server.post('/api/messages', connector.listen());
 
 server.listen(process.env.port || process.env.PORT || 3978, () => {
-   console.log('server listening'); 
+   console.log('server listening');
 });
