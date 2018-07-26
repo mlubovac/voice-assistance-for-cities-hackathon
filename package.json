@@ -13,8 +13,7 @@
     "axios": "^0.18.0",
     "botbuilder": "^3.15.0",
     "express": "^4.16.3",
-    "point-in-polygon": "^1.0.1",
-    "restify": "^7.2.1"
+    "point-in-polygon": "^1.0.1"
   },
   "devDependencies": {
     "nodemon": "^1.18.3"
